@@ -1,1 +1,61 @@
+The given data set has information regarding flight arrival and departure time given details about their airline company and as well as airport details of origin and destination.
+
+1.	Find out the airline company which has a greater number of flight movement.
+
+
+2.	Get the details of the first five flights that has high airtime.
+
+
+3.	Compute the maximum difference between the scheduled and actual arrival and departure time for the flights and categorize it by the airline companies.
+
+
+4.	Find the month in which the flight delays happened to be more.
+
+
+5.	Get the flight count for each state and identify the top 1.
+
+
+6.	 A customer wants to book a flight under an emergency situation. Which airline would you suggest him to book. Justify your answer.
+
+
+7.	Find the dates in each month on which the flight delays are more.
+
+
+8.	Calculate the percentage of flights that are delayed compared to flights that arrived on time.
+
+
+9.	Identify the routes that has more delay time.
+
+
+10.	Find out on which day of week the flight delays happen more.
+
+
+11.	Identify at which part of day flights arrive late.
+
+
+12.	Compute the maximum, minimum and average TaxiIn and TaxiOut time.
+
+
+13.	Get the details of origin and destination with maximum flight movement.
+
+
+14.	Find out which delay cause occurrence is maximum.
+
+
+15.	Get details of flight whose speed is between 400 to 600 miles/hr for each airline company.
+
+
+16.	Identify the best time in a day to book a flight for a customer to reduce the delay.
+
+
+17.	Get the route details with airline company code ‘AQ’
+
+
+18.	Identify on which dates in a year flight movement is large.
+
+
+19.	Find out which delay cause is occurring more for each airline company.
+
+
+20.	 Write a query that represent your unique observation in the database.
 
