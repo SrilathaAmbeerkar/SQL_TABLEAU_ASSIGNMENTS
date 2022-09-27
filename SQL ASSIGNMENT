@@ -1,61 +1,185 @@
 The given data set has information regarding flight arrival and departure time given details about their airline company and as well as airport details of origin and destination.
 
 1.	Find out the airline company which has a greater number of flight movement.
+Query:
 
+ select
+	    C.Carrier_code as Airline_code,
+        f.Carrierid as Airline_id,
+        count(flightid) as Total_flights
+	from Flight_detail as F
+    left join carrier_detail as C
+		on f.carrierid = C.Carrier_ID
+        group by Airline_code, Airline_ID
+        order by Total_flights desc;
 
 2.	Get the details of the first five flights that has high airtime.
+Query:    
 
-
+Select
+	flightid,
+    airtime
+from Flight_detail
+order by airtime desc limit 5;
+  
 3.	Compute the maximum difference between the scheduled and actual arrival and departure time for the flights and categorize it by the airline companies.
+Query:
 
+select
+	carrier_code,
+    max(timediff(arrivaltime, scheduledarrivaltime)) as Arrival_diff,
+    max(timediff(departuretime, scheduleddeparturetime)) as Departure_diff
+from flight_detail as F
+left join Carrier_detail as C
+	on F.carrierid = C.Carrier_id
+group by carrier_code
+order by arrival_diff desc, departure_diff desc;
 
 4.	Find the month in which the flight delays happened to be more.
+Query:
 
+Select
+	Flight_month,
+    count(flightif) as Flight_count
+from Flight_detail
+where (arrivaldelay > 0) or (departuredelay > 0)
+group by Flight_month
+order by Flight_count desc;
 
 5.	Get the flight count for each state and identify the top 1.
+Query:
 
+select
+	s.stateid,
+    s.state_code,
+    count(flightid) as Total_flights
+from Flight_detail as F
+left join Route_detail as R
+	on F.routeid = R.Route_id
+left join Airport_detail as A
+	on R.Destinationcode = A.locationid
+left join state_detail as S
+	on A.stateid = S.stateid
+group by Stateid, state_code
+order by Total_flights desc;
 
 6.	 A customer wants to book a flight under an emergency situation. Which airline would you suggest him to book. Justify your answer.
+Query:
+
+select
+	f.carrierid,
+    carrier_code,
+    count(flightid) as total_flights
+from Flight_detail as F
+left join Carrier_detail as C
+	on f.carrierid = C.carrier_Id
+where arrivaldelay < 0
+group by f.carrierid, carrier_code;
 
 
 7.	Find the dates in each month on which the flight delays are more.
+Query:
 
+Select
+	Flight_date,
+    flight_month,
+    count(flightid) as Total_flights
+from Flight_detail
+where (arrivaldelay > 0) or (departuredelay > 0)
+group by flight_date, flight_month
+order by Total_flights desc;
 
 8.	Calculate the percentage of flights that are delayed compared to flights that arrived on time.
-
+Query:
 
 9.	Identify the routes that has more delay time.
+Query:
 
+select 
+	routeid,
+    arrivaldelay,
+    departuredelay
+from flight_detail
+where arrivaldelay > 0 or departuredelay > 0
+order by arrivaldelay, departuredelay desc;
 
 10.	Find out on which day of week the flight delays happen more.
+Query:
 
+Select
+	dayweek,
+    arrivaldelay,
+    departuredelay,
+    count(flightid) as Total_flights_delayed
+from flight_detail
+where (arrivaldelay > 0) or (departuredelay > 0)
+group by dayweek
+order by Total_flights_delayed desc;
 
 11.	Identify at which part of day flights arrive late.
+Query:
+
 
 
 12.	Compute the maximum, minimum and average TaxiIn and TaxiOut time.
+Query:
 
+select
+	dayweek,
+    max(taxiin) as Max_taxiin,
+    Max(taxiout) as Max_taxiout,
+    Min(taxiin) as Min_taxiin,
+    min(taxiout) as Max_taxiout,
+    Avg(taxiin) as Avg_taxiin,
+    Avg(taxiout) as Avg_taxiout
+    from flight_detail
+    group by dayweek;
 
 13.	Get the details of origin and destination with maximum flight movement.
+Query:
 
+select
+	r.origincode,
+    r.destinationcode,
+    count(flightid) as Total_flights
+from Flight_detail as F
+left join route_detail as r
+on f.routeid = r.route_id
+group by origincode, destinationcode
+order by total_flights desc;
 
 14.	Find out which delay cause occurrence is maximum.
-
+Query
 
 15.	Get details of flight whose speed is between 400 to 600 miles/hr for each airline company.
-
+Query
 
 16.	Identify the best time in a day to book a flight for a customer to reduce the delay.
-
+Query:
 
 17.	Get the route details with airline company code ‘AQ’
-
+Query:
 
 18.	Identify on which dates in a year flight movement is large.
+Query:
 
+select 
+	Flight_date,
+    count(flightid) as total_flights
+from flight_detail
+group by flight_date
+order by Total_flights desc;
 
 19.	Find out which delay cause is occurring more for each airline company.
-
+Query:
 
 20.	 Write a query that represent your unique observation in the database.
+Query:
 
+select
+	arrivaldelay,
+    d:eparturedelay,
+	count(flightid) as totalflights
+from flight_detail
+where arrivaldelay = 1 or departuredelay = 1
+group by arrivaldelay, departuredelay;
